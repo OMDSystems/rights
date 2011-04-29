@@ -10,7 +10,7 @@ import models.*;
 public class Administration extends Controller{
 
     public static void addUser(){
-        User user = new User(params.get("username"), params.get("password"));
+        User user = new User(params.get("username"), params.get("password"),params.get("usergroup"));
         user.save();
         renderJSON(user);
     }

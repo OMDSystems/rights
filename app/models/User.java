@@ -25,16 +25,27 @@ public final class User extends Model{
         return user;
     }
 
+    private String usergroup;
     private String username;
     private String password;
     private String sessionKey;
     private long sessionEnd;
 
-    public User(String username, String password) {
+    public User(String username, String password, String usergroup) {
+        this.usergroup = usergroup;
         this.username = username;
         this.password = Codec.hexSHA1(password);
         this.sessionEnd = 0;
     }
+
+    public String getUsergroup() {
+        return usergroup;
+    }
+
+    public void setUsergroup(String usergroup) {
+        this.usergroup = usergroup;
+    }
+
 
     public String getPassword() {
         return password;
