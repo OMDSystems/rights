@@ -73,7 +73,8 @@ public final class User extends Model{
         }
         Map<String, Object> info = new HashMap<String, Object>();
         info.put("omd_auth_key", sessionKey);
-        info.put("valid_for", SESSION_DURATION);
+        long valid_for = sessionEnd - System.currentTimeMillis() / 1000;
+        info.put("valid_for", valid_for > 0 ? valid_for : 0);
         return info;
     }
 

@@ -8,7 +8,7 @@
 # Map static resources from the /app/public folder to the /public path
 #GET     /public/                                staticDir:public
 
-POST     /administration/add_user                 Administration.addUser(format: 'application/json')
-GET      /administration/auth_user                Administration.authenticateUser(format: 'application/json')
-POST     /administration/add_group                Administration.addGroup(format: 'application/json')
-GET      /administration/groups/{id}              Administration.getGroup(format: 'application/json')
+POST     /users/create                    Users.create(format: 'application/json')
+GET      /users/authenticate              Users.authenticate(format: 'application/json')
+POST     /groups/create                   Groups.create(format: 'application/json')
+GET      /groups/{id}                     Groups.show(format: 'application/json')
