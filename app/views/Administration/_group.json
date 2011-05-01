@@ -1,0 +1,9 @@
+{
+  "name" : ${group.name},
+  "description" : ${group.description},
+  "users" : [
+    #{list items: group.users, as: 'user'}
+      #{include 'Administration/_user.json'/}
+    #{/list}
+  ]
+}

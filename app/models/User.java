@@ -2,14 +2,15 @@ package models;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import play.data.validation.*;
 import play.db.jpa.Model;
 import play.libs.Codec;
 
 /**
  *
  * @author Marvin
- * @editor Dario
+ * @author Dario
  */
 @Entity
 public final class User extends Model{
@@ -25,25 +26,28 @@ public final class User extends Model{
         return user;
     }
 
-    private String usergroup;
+    @ManyToOne
+    @Required
+    private UserGroup group;
+    @Column(unique=true)
     private String username;
     private String password;
     private String sessionKey;
     private long sessionEnd;
 
-    public User(String username, String password, String usergroup) {
-        this.usergroup = usergroup;
+    public User(String username, String password, UserGroup group) {
+        this.group = group;
         this.username = username;
         this.password = Codec.hexSHA1(password);
         this.sessionEnd = 0;
     }
 
-    public String getUsergroup() {
-        return usergroup;
+    public UserGroup getUserGroup() {
+        return group;
     }
 
-    public void setUsergroup(String usergroup) {
-        this.usergroup = usergroup;
+    public void setUserGroup(UserGroup group) {
+        this.group = group;
     }
 
 
