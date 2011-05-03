@@ -1,0 +1,5 @@
+{
+  "id" : ${user.id},
+  "username" : "${user.username}",
+  "group" : ${user.group.id}
+}

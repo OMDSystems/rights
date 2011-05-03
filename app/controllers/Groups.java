@@ -11,14 +11,14 @@ public class Groups extends AbstractController {
     public static void show(long id) {
         UserGroup group = UserGroup.findById(id);
         notFoundIfNull(group);
-        renderTemplate("Administration/_group.json", group);
+        renderTemplate("Groups/_group.json", group);
     }
 
     public static void create(String name, String description) {
         try {
             UserGroup group = new UserGroup(name, description);
             group.save();
-            renderTemplate("Administration/_group.json", group);
+            renderTemplate("Groups/_group.json", group);
         } catch(PersistenceException e) {
             badRequest();
         }

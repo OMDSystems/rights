@@ -14,7 +14,7 @@ public class Users extends AbstractController {
             notFoundIfNull(group, "Group with id " + group_id + " does not exist.");
             User user = new User(username, password, group);
             user.save();
-            renderTemplate("Administration/_user.json", user);
+            renderTemplate("Users/_user.json", user);
         } catch(PersistenceException e) {
             badRequest();
         }
@@ -26,6 +26,20 @@ public class Users extends AbstractController {
             renderJSON(user.getOMDAuthInfo());
         } catch (AuthenticationFailedException e) {
             badRequest();
+        }
+    }
+
+    public static void authorize(String token, String uri) {
+        User user = User.find("bySessionKey", token).first();
+        if(user == null) {
+            unauthorized();
+        } else {
+            if((user.getUserGroup().getName().equals("parents") && uri.equals("/queue/position"))
+                || user.getUserGroup().getName().equals("admins")) {
+                ok();
+            } else {
+                renderJSON(uri);
+            }
         }
     }
 }

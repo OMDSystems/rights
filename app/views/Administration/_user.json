@@ -1,4 +1,0 @@
-{
-  "username" : "${user.username}",
-  "group" : "${user.group.id}"
-}
